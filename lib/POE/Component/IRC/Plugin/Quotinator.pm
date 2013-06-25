@@ -34,7 +34,7 @@ sub S_public {
     my $msg     = ${$_[2]};
 
     my ($cmd_args) = $msg =~ m/^!quote\s(.*)$/i;
-    my ($help, %add, $del, $search, $get);
+    my ($help, $add, $del, $search, $get);
     GetOptionsFromString(
         $cmd_args,
         'help|usage|?' => \$help,
