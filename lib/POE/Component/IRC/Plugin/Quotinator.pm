@@ -31,6 +31,7 @@ sub S_public {
     my ($self, $irc) = splice @_, 0, 2;
     my ($nick, $user, $host) = parse_user(${$_[0]});
     my $channel = ${$_[1]}->[0];
+    pp($channel);
     my $msg     = ${$_[2]};
 
     my ($cmd_args) = $msg =~ m/^!quote\s(.*)$/i;
