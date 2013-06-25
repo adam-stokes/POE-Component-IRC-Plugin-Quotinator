@@ -34,14 +34,14 @@ sub S_public {
     my $msg     = ${$_[2]};
 
     my ($cmd_args) = $msg =~ m/^!quote\s(.*)$/i;
-    my ($help, $add, $del, $search, $get);
+    my ($help, %add, $del, $search, $get);
     GetOptionsFromString(
         $cmd_args,
         'help|usage|?' => \$help,
-        'add:s'        => \$add,
-        'del:s'        => \$del,
-        'search:s'     => \$search,
-        'get:s'        => \$get,
+        'add=s%'        => \$add,
+        'del=s'        => \$del,
+        'search=s'     => \$search,
+        'get=s'        => \$get,
         '<>'           => sub {
             $irc->yield(
                 privmsg => $channel,
