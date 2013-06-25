@@ -54,7 +54,7 @@ sub S_public {
     if ($help) {
         $irc->yield(
             privmsg => $channel,
-            sprintf("%s: Usage [add|del|search|get] (id|nick) ", $nick);
+            sprintf("%s: Usage [add|del|search|get] (id|nick) ", $nick)
         );
         return PCI_EAT_PLUGIN;
     }
@@ -63,7 +63,7 @@ sub S_public {
         pp($add);
         $irc->yield(
             privmsg => $channel,
-            sprintf("%s: Usage [add|del|search|get] (id|nick) ", $nick);
+            sprintf("%s: Usage [add|del|search|get] (id|nick) ", $nick)
         );
         return PCI_EAT_PLUGIN;
     }
