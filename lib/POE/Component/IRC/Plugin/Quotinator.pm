@@ -4,7 +4,7 @@ package POE::Component::IRC::Plugin::Quotinator;
 
 # VERSION
 
-use Getopt::Long qw(GetOptionsFromString);
+use Getopt::Long qw(GetOptionsFromString :config pass_through);
 use POE::Component::IRC::Plugin qw(:ALL);
 use IRC::Utils qw(:ALL);
 use Data::Dump qw[pp];
@@ -38,7 +38,7 @@ sub S_public {
     GetOptionsFromString(
         $cmd_args,
         'help|usage|?' => \$help,
-        'add=s%'        => \$add,
+        'add=s'        => \$add,
         'del=s'        => \$del,
         'search=s'     => \$search,
         'get=s'        => \$get,
