@@ -12,7 +12,6 @@ use Data::Dump qw[pp];
 sub new {
     my ($package) = shift;
     my %args = @_;
-    $args{version} = {eval $VERSION};
     return bless \%args, $package;
 }
 
