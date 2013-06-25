@@ -30,24 +30,20 @@ sub S_public {
     my ($self, $irc) = splice @_, 0, 2;
     my ($nick, $user, $host) = parse_user(${$_[0]});
     my $channel = ${$_[1]}->[0];
-    pp($channel);
+    # Only care about our limited channels as the quote bot can 
+    # get quite offensive. :D
+    return 1 unless $channel eq $self->limit_chan;
     my $msg     = ${$_[2]};
 
     my ($cmd_args) = $msg =~ m/^!quote\s(.*)$/i;
     my ($help, $add, $del, $search, $get);
-    GetOptionsFromString(
+    my ($ret, $excess_opt) = GetOptionsFromString(
         $cmd_args,
         'help|usage|?' => \$help,
         'add=s'        => \$add,
         'del=s'        => \$del,
         'search=s'     => \$search,
         'get=s'        => \$get,
-        '<>'           => sub {
-            $irc->yield(
-                privmsg => $channel,
-                "$nick: unknown generator option, use -h for more info."
-            );
-        },
     );
 
     if ($help) {
@@ -59,10 +55,9 @@ sub S_public {
     }
 
     if ($add) {
-        pp($add);
         $irc->yield(
             privmsg => $channel,
-            sprintf("%s: Usage [add|del|search|get] (id|nick) ", $nick)
+            sprintf("%s: adding (%s's) \"%s\"", $nick, $add, join(" ", @{$excess_opt}))
         );
         return PCI_EAT_PLUGIN;
     }
