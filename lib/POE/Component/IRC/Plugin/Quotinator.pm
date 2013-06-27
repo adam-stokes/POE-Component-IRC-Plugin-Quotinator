@@ -77,7 +77,7 @@ sub S_public {
 
     if ($del) {
         my $quoteid = $del;
-        $self->{collection}->remove({_id => $quoteid,})
+        $self->{collection}->remove({_id => $quoteid})
           unless !$self->{collection}->find_one({_id => $quoteid});
         $irc->yield(
             privmsg => $channel,
@@ -90,7 +90,7 @@ sub S_public {
     }
 
     if ($get) {
-        my $quote = $self->{collection}->find({nick => $get,});
+        my $quote = $self->{collection}->find_one({nick => $get});
         $irc->yield(
             privmsg => $channel,
             sprintf("%s %s: \"%s\"",
